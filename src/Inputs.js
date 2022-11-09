@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import tinycolor from 'tinycolor2';
+
 import { formatInputValues } from './formatters';
-import { usePicker } from './context';
 import { inputWrap, inputLabel } from './style';
+import { usePicker } from './context';
 
 const Inputs = () => {
 	const { handleChange, r, g, b, opacity } = usePicker();

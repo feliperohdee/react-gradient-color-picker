@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
-import throttle from 'lodash.throttle';
-import usePaintSquare from './usePaintSquare';
-import { usePicker } from './context';
+import _ from 'lodash';
+import { useCallback, useRef, useState } from 'react';
+
 import { handle, canvasWrapper } from './style';
+import { usePicker } from './context';
+import usePaintSquare from './usePaintSquare';
 
 const Square = () => {
 	const { handleColor, x, y, internalHue, squareWidth, squareHeight } = usePicker();
@@ -13,7 +14,7 @@ const Square = () => {
 	const onChange = useCallback(
 		(target, clientX, clientY) => {
 			const ctx = canvas?.current?.getContext('2d');
-			const onMouseMove = throttle(() => {
+			const onMouseMove = _.throttle(() => {
 				handleColor(target, clientX, clientY, ctx);
 			}, 250);
 			onMouseMove();

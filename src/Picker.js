@@ -1,13 +1,12 @@
-import React from 'react';
+import { usePicker } from './context';
+import Controls from './Controls';
+import GradientBar from './GradientBar';
 import Hue from './Hue';
 import Inputs from './Inputs';
-import Square from './Square';
 import Opacity from './Opacity';
 import Presets from './Presets';
-import Controls from './Controls';
 import PropTypes from 'prop-types';
-import GradientBar from './GradientBar';
-import { usePicker } from './context';
+import Square from './Square';
 
 const Picker = ({ hideControls, hideInputs, hidePresets, presets }) => {
 	const { isGradient } = usePicker();

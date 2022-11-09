@@ -1,9 +1,10 @@
 import tinycolor from 'tinycolor2';
+
 import { high, low } from './formatters';
 import { isUpperCase } from './utils';
 
 export const gradientParser = (input = '') => {
-	var tokens = {
+	let tokens = {
 		linearGradient: /^(-(webkit|o|ms|moz)-)?(linear-gradient)/i,
 		repeatingLinearGradient: /^(-(webkit|o|ms|moz)-)?(repeating-linear-gradient)/i,
 		radialGradient: /^(-(webkit|o|ms|moz)-)?(radial-gradient)/i,
@@ -30,13 +31,13 @@ export const gradientParser = (input = '') => {
 	};
 
 	function error(msg) {
-		var err = new Error(input + ': ' + msg);
+		let err = new Error(input + ': ' + msg);
 		err.source = input;
 		throw err;
 	}
 
 	function getAST() {
-		var ast = matchListDefinitions();
+		let ast = matchListDefinitions();
 
 		if (input.length > 0) {
 			error('Invalid input not EOF');
@@ -77,7 +78,7 @@ export const gradientParser = (input = '') => {
 
 	function matchGradient(gradientType, pattern, orientationMatcher) {
 		return matchCall(pattern, function (captures) {
-			var orientation = orientationMatcher();
+			let orientation = orientationMatcher();
 			if (orientation) {
 				if (!scan(tokens.comma)) {
 					error('Missing comma before color stops');
@@ -93,14 +94,14 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchCall(pattern, callback) {
-		var captures = scan(pattern);
+		let captures = scan(pattern);
 
 		if (captures) {
 			if (!scan(tokens.startCall)) {
 				error('Missing (');
 			}
 
-			var result = callback(captures);
+			let result = callback(captures);
 
 			if (!scan(tokens.endCall)) {
 				error('Missing )');
@@ -123,7 +124,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchListRadialOrientations() {
-		var radialOrientations,
+		let radialOrientations,
 			radialOrientation = matchRadialOrientation(),
 			lookaheadCache;
 
@@ -146,20 +147,20 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchRadialOrientation() {
-		var radialType = matchCircle() || matchEllipse();
+		let radialType = matchCircle() || matchEllipse();
 
 		if (radialType) {
 			radialType.at = matchAtPosition();
 		} else {
-			var extent = matchExtentKeyword();
+			let extent = matchExtentKeyword();
 			if (extent) {
 				radialType = extent;
-				var positionAt = matchAtPosition();
+				let positionAt = matchAtPosition();
 				if (positionAt) {
 					radialType.at = positionAt;
 				}
 			} else {
-				var defaultPosition = matchPositioning();
+				let defaultPosition = matchPositioning();
 				if (defaultPosition) {
 					radialType = {
 						type: 'default-radial',
@@ -173,7 +174,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchCircle() {
-		var circle = match('shape', /^(circle)/i, 0);
+		let circle = match('shape', /^(circle)/i, 0);
 
 		if (circle) {
 			circle.style = matchLength() || matchExtentKeyword();
@@ -183,7 +184,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchEllipse() {
-		var ellipse = match('shape', /^(ellipse)/i, 0);
+		let ellipse = match('shape', /^(ellipse)/i, 0);
 
 		if (ellipse) {
 			ellipse.style = matchDistance() || matchExtentKeyword();
@@ -198,7 +199,7 @@ export const gradientParser = (input = '') => {
 
 	function matchAtPosition() {
 		if (match('position', /^at/, 0)) {
-			var positioning = matchPositioning();
+			let positioning = matchPositioning();
 
 			if (!positioning) {
 				error('Missing positioning value');
@@ -209,7 +210,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchPositioning() {
-		var location = matchCoordinates();
+		let location = matchCoordinates();
 
 		if (location.x || location.y) {
 			return {
@@ -227,7 +228,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchListing(matcher) {
-		var captures = matcher(),
+		let captures = matcher(),
 			result = [];
 
 		if (captures) {
@@ -246,7 +247,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function matchColorStop() {
-		var color = matchColor();
+		let color = matchColor();
 
 		if (!color) {
 			error('Expected color definition');
@@ -352,7 +353,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function match(type, pattern, captureIndex) {
-		var captures = scan(pattern);
+		let captures = scan(pattern);
 		if (captures) {
 			return {
 				type: type,
@@ -362,7 +363,7 @@ export const gradientParser = (input = '') => {
 	}
 
 	function scan(regexp) {
-		var captures, blankCaptures;
+		let captures, blankCaptures;
 
 		blankCaptures = /^[\n\r\t\s]+/.exec(input);
 		if (blankCaptures) {

@@ -1,9 +1,8 @@
-import React from 'react';
-import { usePicker } from './context';
-import { formatInputValues } from './formatters';
 import { controlBtnStyles } from './Controls';
-import { LinearIcon, RadialIcon, DegreesIcon, StopIcon, TrashIcon } from './icon';
 import { controlBtnsWrap, controlBtn, degreeInput, borderBox } from './style';
+import { formatInputValues } from './formatters';
+import { LinearIcon, RadialIcon, DegreesIcon, StopIcon, TrashIcon } from './icon';
+import { usePicker } from './context';
 
 const GradientControls = () => {
 	const { gradientType } = usePicker();

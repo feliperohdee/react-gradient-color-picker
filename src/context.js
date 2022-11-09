@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import tinycolor from 'tinycolor2';
+
+import constants from './constants';
 import { low, getColors } from './formatters';
-import { config } from './constants';
 import {
 	computePickerPosition,
 	getGradientType,
@@ -12,7 +13,6 @@ import {
 	isUpperCase
 } from './utils';
 
-const { crossSize } = config;
 const PickerContext = createContext();
 
 export default function PickerContextWrapper({ children, bounds, value, onChange, squareWidth, squareHeight }) {
@@ -106,8 +106,8 @@ export default function PickerContextWrapper({ children, bounds, value, onChange
 
 	const handleColor = (target, clientX, clientY, ctx) => {
 		const [x, y] = computePickerPosition(target, clientX, clientY);
-		const x1 = Math.min(x + crossSize / 2, squareWidth - 1);
-		const y1 = Math.min(y + crossSize / 2, squareHeight - 1);
+		const x1 = Math.min(x + constants.crossSize / 2, squareWidth - 1);
+		const y1 = Math.min(y + constants.crossSize / 2, squareHeight - 1);
 		const [r, g, b] = ctx.getImageData(x1, y1, 1, 1).data;
 		let newColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
 		handleChange(newColor);

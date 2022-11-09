@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
+import { barWrap, barWrapInner, handle, borderBox } from './style';
 import { usePicker } from './context';
 import usePaintHue from './usePaintHue';
-import { barWrap, barWrapInner, handle, borderBox } from './style';
 
 const Hue = () => {
 	const barRef = useRef(null);

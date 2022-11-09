@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePicker } from './context';
 
 const Presets = ({ presets = [] }) => {
@@ -7,9 +6,9 @@ const Presets = ({ presets = [] }) => {
 	const getPresets = () => {
 		if (presets?.length > 0) {
 			return presets?.slice(0, 18);
-		} else {
-			return fakePresets;
 		}
+		
+		return fakePresets;
 	};
 
 	return (

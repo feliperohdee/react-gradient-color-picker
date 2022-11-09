@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { usePicker } from './context';
 import { barWrap, barWrapInner, handle, opacityOverlay, opacityBg } from './style';
+import { usePicker } from './context';
+import { useState } from 'react';
 
 const Opacity = () => {
 	const { handleOpacity, opacity, tinyColor, squareWidth } = usePicker();

@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+
+import { barWrap, barWrapInner, gradientHandleWrap, gradientHandle } from './style';
 import { getHandleValue } from './utils';
 import { usePicker } from './context';
-import { barWrap, barWrapInner, gradientHandleWrap, gradientHandle } from './style';
 
 const GradientBar = () => {
 	const { createGradientStr, addPoint, colors, value, squareWidth } = usePicker();

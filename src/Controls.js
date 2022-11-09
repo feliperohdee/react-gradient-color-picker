@@ -1,16 +1,15 @@
 import React from 'react';
 import { usePicker } from './context';
-import { config } from './constants';
-import GradientControls from './GradientControls';
-import { controlBtn, borderBox } from './style';
 
-var { defaultColor, defaultGradient } = config;
+import { controlBtn, borderBox } from './style';
+import constants from './constants';
+import GradientControls from './GradientControls';
 
 const Controls = () => {
 	const { isGradient, onChange, previousColors, previousGraidents } = usePicker();
-
-	const solidColor = previousColors?.[0] || defaultColor;
-	const gradientColor = previousGraidents?.[0] || defaultGradient;
+	
+	const solidColor = previousColors?.[0] || constants.defaultColor;
+	const gradientColor = previousGraidents?.[0] || constants.defaultGradient;
 
 	const setSolid = () => {
 		onChange(solidColor);
